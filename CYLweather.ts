@@ -12,30 +12,54 @@
 //% parts="Code your Life"
 namespace cyl {
 
-    /*
-    let wifiPass = ""
-    let wifiName = ""
-    let wUrl = "momatita.kleeberg.berlin"
-    let port = "3001"
-    let initDone = false
-    let connDone = false
-    */
+    const wUrl = "momatita.kleeberg.berlin"
+    const port = 3001
 
     /**
-     * Mit diesem Block wird die Verbindung zu einem "Code your Life" WLAN-Modul hergestellt.
+     * Mit diesem Block können enventuell auftretende Fehler behoben werden.
      */
-    //% blockId=custom_initWifi block="mit dem WLAN-Modul verbinden"
-    export function initWifi(): void {
+    //% blockId=cyl_resetWifi block="das WLAN-Modul zurücksetzen"
+    export function resetWifi(): void {
+        basic.clearScreen()
+        led.plot(0, 0)
         modem.init(
             SerialPin.C17,
             SerialPin.C16,
             BaudRate.BaudRate9600
         )
-        // switch to 115200, 8N1 and reset, just to be sure
         modem.pushAT("+UART=115200,8,1,0,0")
         basic.pause(500)
         modem.pushAT("+RST")
         basic.pause(2000)
+        led.plot(1, 0)
+        modem.init(
+            SerialPin.C17,
+            SerialPin.C16,
+            BaudRate.BaudRate56700
+        )
+        modem.pushAT("+UART=115200,8,1,0,0")
+        basic.pause(500)
+        modem.pushAT("+RST")
+        basic.pause(2000)
+        led.plot(2, 0)
+        modem.init(
+            SerialPin.C17,
+            SerialPin.C16,
+            BaudRate.BaudRate115200
+        )
+        modem.pushAT("+CWJAP=\"namexX00\",\"passwordxX00\"")
+        basic.pause(3000)
+        led.plot(3, 0)
+        basic.pause(2000)
+        modem.pushAT("+RST")
+        led.plot(4, 0)
+    }
+
+    /**
+     * Mit diesem Block wird die Verbindung zu einem "Code your Life" WLAN-Modul hergestellt.
+     */
+    //% blockId=cyl_initWifi block="mit dem WLAN-Modul verbinden"
+    export function initWifi(): void {
         modem.init(
             SerialPin.C17,
             SerialPin.C16,
@@ -47,9 +71,6 @@ namespace cyl {
         // clear buffer
         serial.readString();
         modem.expectOK("E0");
-
-        // init wurde durchgefuehrt
-        //initDone = true
     }
 
     /**
@@ -57,27 +78,17 @@ namespace cyl {
      * @param name Name des WLAN-Netzwerkes, eg: "Name des WLAN"
      * @param pass Passwort des WLAN-Netzwerkes, eg: "Passwort des WLAN"
      */
-    //% blockId=custom_connectWifi block="mit WLAN verbinden:|Name %name|Passwort %pass"
+    //% blockId=cyl_connectWifi block="mit WLAN verbinden:|Name %name|Passwort %pass"
     export function connectWifi(name: string, pass: string): void {
-        /*if (!initDone) {
-            // pruefen ob init durchgefuehrt wurde
-            basic.showString("FEHLER")
-            return
-        }*/
-
         let repeat = true
-        //wifiName = name
-        //wifiPass = pass
         while (repeat) {
             if (modem.expectOK("+CWMODE=1")) {
                 modem.pushAT("+CWJAP=\"" + name + "\",\"" + pass + "\"")
                 repeat = false
                 basic.pause(10000)
-                // connect wurde durchgefuehrt
             }
             basic.pause(500)
         }
-        //connDone = true
     }
 
     /**
@@ -89,33 +100,10 @@ namespace cyl {
      * @param wind Windstärke die gesendet werden soll, eg: 0
      * @param rain Niederschlagshöhe die gesendet werden soll, eg: 0
      */
-    //% blockId=custom_sendData block="Wetterdaten an den Server senden|Wetter-ID %key|Temperatur %temp|Helligkeit %light|Windstärke %wind|Niederschlag %rain"
+    //% blockId=cyl_sendData block="Wetterdaten an den Server senden|Wetter-ID %key|Temperatur %temp|Helligkeit %light|Windstärke %wind|Niederschlag %rain"
     export function sendData(key: string, temp: number, light: number, wind: number, rain: number): void {
-        /*if (!connDone) {
-            // pruefen ob connect durchgefuehrt wurde
-            basic.showString("FEHLER")
-            return
-        }*/
         let message = "{ \"key\": \"" + key + "\", \"temp\": " + temp + ", \"light\": " + light + ", \"wind\": " + wind + ", \"rain\": " + rain + " }"
 
-        /*
-        let repeat = true
-        while (repeat) {
-            let data = modem.sendAT("+CWJAP?")
-            if (data.length >= 2 && data[data.length - 2].compare("No AP") != 0 && data[data.length - 1].compare("OK") == 0) {
-                repeat = false
-            } else {
-                let repeat1 = true
-                while (repeat1) {
-                    if (modem.expectOK("+CWMODE=1")) {
-                        modem.pushAT("+CWJAP=\"" + wifiName + "\",\"" + wifiPass + "\"")
-                        repeat1 = false
-                        basic.pause(10000)
-                    }
-                }
-            }
-        }
-        */
         let fail = true
         while (fail) {
             if (modem.expectOK("+CIPMODE=0")) {

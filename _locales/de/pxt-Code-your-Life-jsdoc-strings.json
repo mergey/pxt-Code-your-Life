@@ -1,4 +1,5 @@
 {
+  "cyl.resetWifi": "Mit diesem Block können enventuell auftretende Fehler behoben werden.",
   "cyl.initWifi": "Mit diesem Block wird die Verbindung zu einem \"Code your Life\" WLAN-Modul hergestellt.",
   "cyl.connectWifi": "Mit diesem Block baut das verbundene WLAN-Modul ein Netzwerkverbindung zu einem Hotspot auf.",
   "cyl.connectWifi|name": "Name des WLAN-Netzwerkes",
