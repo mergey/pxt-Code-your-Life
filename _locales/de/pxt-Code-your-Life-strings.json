@@ -1,0 +1,7 @@
+{
+  "cyl.initWifi|block": "mit dem WLAN-Modul verbinden",
+  "cyl.connectWifi|block": "mit WLAN verbinden:|Name %name|Passwort %pass",
+  "cyl.sendData|block": "Wetterdaten an den Server senden|Wetter-ID %key|Temperatur %temp|Helligkeit %light|Windstärke %wind|Niederschlag %rain",
+  "cyl|block": "Code your Life",
+  "{id:category}cyl": "Code your Life"
+}

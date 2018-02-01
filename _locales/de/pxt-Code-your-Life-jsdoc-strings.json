@@ -1,0 +1,12 @@
+{
+  "cyl.initWifi": "Mit diesem Block wird die Verbindung zu einem \"Code your Life\" WLAN-Modul hergestellt.",
+  "cyl.connectWifi": "Mit diesem Block baut das verbundene WLAN-Modul ein Netzwerkverbindung zu einem Hotspot auf.",
+  "cyl.connectWifi|name": "Name des WLAN-Netzwerkes",
+  "cyl.connectWifi|pass": "Passwort des WLAN-Netzwerkes",
+  "cyl.sendData": "Mit diesem Block werden Wetterdaten an den Code your Life Wetter-Server gesendent.\nDafür wird eine Wetter-ID benötigt, welche Schulen und andere Einrichtungen von Code your Life erhalten können.",
+  "cyl.sendData|key": "Wetter-ID der die Wetterdaten zugeordnet werden sollen",
+  "cyl.sendData|temp": "Temperatur die gesendet werden soll",
+  "cyl.sendData|light": "Helligkeit die gesendet werden soll",
+  "cyl.sendData|wind": "Windstärke die gesendet werden soll",
+  "cyl.sendData|rain": "Niederschlagshöhe die gesendet werden soll"
+}

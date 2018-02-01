@@ -1,0 +1,22 @@
+{
+    "name": "pxt-Code-your-Life",
+    "version": "0.3",
+    "description": "Code your Life weather-service using a ESP8622 wifi module",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "pxt-calliope-modem": "*"
+    },
+    "files": [
+        "README.md",
+        "CYLweather.ts",
+        "_locales/de/pxt-Code-your-Life-jsdoc-strings.json",
+        "_locales/de/pxt-Code-your-Life-strings.json"
+    ],
+    "testFiles": [],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/calliope-mini/pxt-calliope-esp.git"
+    },
+    "public": true
+}
