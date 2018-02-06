@@ -42,7 +42,7 @@ basic.showNumber(2)
 
 ## Meta
 
-- PXT/calliope
+- for PXT/calliope
 
 Depends on [pxt-calliope-modem](https://github.com/calliope-mini/pxt-calliope-modem).
 
