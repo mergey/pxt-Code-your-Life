@@ -4,8 +4,8 @@
     "description": "Code your Life weather-service using a ESP8622 wifi module",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
-        //"pxt-calliope-modem": "*"
+        "core": "*",
+        "pxt-calliope-modem": "*"
     },
     "files": [
         "README.md",
