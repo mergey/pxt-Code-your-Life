@@ -1,6 +1,6 @@
 {
     "name": "pxt-Code-your-Life",
-    "version": "0.3",
+    "version": "0.0.3",
     "description": "Code your Life weather-service using a ESP8622 wifi module",
     "license": "MIT",
     "dependencies": {
